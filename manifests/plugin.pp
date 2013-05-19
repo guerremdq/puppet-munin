@@ -48,6 +48,8 @@ define munin::plugin (
     }
 	if $linkplugins == true {
       file  { "/etc/munin/plugins/${name}":
+			require => Package['munin-node'],
+            notify  => Service['munin-node'],
             ensure => link,
             target => "${munin::plugins_dir}/${name}",
         	}
